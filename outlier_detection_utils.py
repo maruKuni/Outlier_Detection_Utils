@@ -98,7 +98,7 @@ class Outlier_Detection:
             case False:
                 consistency_constant = self._empritical_quantile(x)
             case 'auto':
-                is_normal: bool = self._is_normal(x)
+                is_normal: bool = self._is_normal(x, normality_test)
                 if is_normal:
                     consistency_constant = 1.4286
                 else:
