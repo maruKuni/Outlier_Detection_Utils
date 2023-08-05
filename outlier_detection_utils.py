@@ -18,7 +18,8 @@ class Outlier_Detection:
         std = x.std()
         mean = x.mean()
         standardized_x = (x-mean)/std
-        upper_bound = np.floor(len(x) * upper)
+        upper_bound = np.int32(np.floor(len(x) * upper))
+        print(upper_bound)
         quantile = sorted(standardized_x)[upper_bound]
         return quantile
 
@@ -99,11 +100,12 @@ class Outlier_Detection:
                 consistency_constant = self._empritical_quantile(x)
             case 'auto':
                 is_normal: bool = self._is_normal(x, normality_test)
-                if is_normal:
-                    consistency_constant = 1.4286
-                else:
-                    consistency_constant = self._empritical_quantile(x)
+                # if is_normal:
+                consistency_constant = 1.4286
+                # else:
+                # consistency_constant = self._empritical_quantile(x)
         mad = consistency_constant * mad
+        print(mad)
         for i, value in enumerate(x):
             if np.abs(value - median) / mad > n:
                 outlier_index.append(i)
